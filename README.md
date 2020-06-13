@@ -44,6 +44,6 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ## Learn More
 
-- [Create React App and Express](documentation/create-react-app-express)
+- [Create React App](documentation/create-react-app.md)
 
-- [Create React App documentation](documentation/create-react-app)
+- [Build this template from scratch](documentation/build-this-template-from-scratch.md)

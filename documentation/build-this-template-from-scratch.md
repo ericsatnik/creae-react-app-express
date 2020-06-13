@@ -1,37 +1,41 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and [Express - Node.js web application framework](https://expressjs.com/)
+[View README.md](../README.md)
 
-## Step 1: Install create-react-app
+This template was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and [Express - Node.js web application framework](https://expressjs.com/)
+
+# Build this template from scratch
+
+## Step 1: 
+
+Create a new `create-react-app` project, name it create-react-app-express, and install packages
 
 ```
- create-react-app create-react-app-express
+ npx create-react-app create-react-app-express
 ```
 
-## Step 2: Install packages for create react app
+## Step 2: 
 
-```
-npm i
-```
-
-## Step 3: Install express
+Install `express` as a dependency
 
 ```
 npm install express --save
 ```
 
-## Step 4: Install nodemon and concurrently
+## Step 3: 
+
+Install `nodemon` and `concurrently` as dev dependencies
 
 ```
 npm install nodemon concurrently --save-dev
 ```
 
-## Step 5: Create a src/server/index.js file
+## Step 4: Add `src/server/index.js` file
 
 ```
 const express = require("express");
 
 const app = express();
 
-app.use(express.static("dist"));
+app.use(express.static("build"));
 
 app.get('/ping', function (req, res) {
     return res.send('pong');
@@ -59,7 +63,7 @@ app.listen(process.env.PORT || 8080, () =>
 );
 ```
 
-## Step 6: Update App.js file
+## Step 5: Update `src/App.js` file
 
 ```
 import React, { useState, useEffect } from "react";
@@ -112,23 +116,34 @@ export default App;
 
 ```
 
-## Step 7: Update your package.json
+## Step 6: Add `proxy` to `package.json`
 
 ```
 "proxy": "http://localhost:8080"
 ```
 
-## Step 8: Update package.json scripts
+## Step 7: Update `scripts` in `package.json`
 
 ```
-    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "start": "concurrently \"npm run client\" \"npm run server\"",
     "client": "react-scripts start",
     "server": "nodemon src/server",
+    "build": "concurrently \"react-scripts build\" \"npm run server\"",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
 ```
 
-
-## Step 9: Start your react app
+## Step 8: Start `create-react-app-express` 
 
 ```
 npm run start
 ```
+
+Runs the app client and server in the development mode.
+
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+Open [http://localhost:8080](http://localhost:8080) to view it in the browser.
+
+
+
