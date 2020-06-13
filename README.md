@@ -4,7 +4,7 @@ In the project directory, you can run:
 
 ### `npm start`
 
-Runs `npm RUN client` and `npm RUN server` concurrently
+Runs `npm run client` and `npm run server` concurrently
 
 ### `npm run client`
 
