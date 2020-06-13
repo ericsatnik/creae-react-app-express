@@ -1,6 +1,7 @@
 [View README.md](../README.md)
 
-This template was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and [Express - Node.js web application framework](https://expressjs.com/)
+This template was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and [Express](https://github.com/expressjs/express)
+
 
 # Build this template from scratch
 
