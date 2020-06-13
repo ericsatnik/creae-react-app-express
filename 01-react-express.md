@@ -24,7 +24,7 @@ npm install express --save
 npm install nodemon concurrently --save-dev
 ```
 
-## Step 5: Create a server.js file
+## Step 5: Create a src/server/index.js file
 
 ```
 const express = require("express");
@@ -121,13 +121,14 @@ export default App;
 ## Step 8: Update package.json scripts
 
 ```
-    "server": "nodemon server.js",
-    "dev": "concurrently \"npm run server\" \"npm run start\""
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "client": "react-scripts start",
+    "server": "nodemon src/server",
 ```
 
 
 ## Step 9: Start your react app
 
 ```
-npm run dev
+npm run start
 ```
