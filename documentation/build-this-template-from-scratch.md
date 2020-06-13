@@ -1,6 +1,6 @@
 [View README.md](../README.md)
 
-This template was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and [Express](https://github.com/expressjs/express)
+This template was bootstrapped with [create-react-app](https://github.com/facebook/create-react-app) and [Express](https://github.com/expressjs/express)
 
 
 # Build this template from scratch
@@ -21,6 +21,10 @@ Install `express` as a dependency
 npm install express --save
 ```
 
+Learn more about this package:
+
+- [Express](https://github.com/expressjs/express)
+
 ## Step 3: 
 
 Install `nodemon` and `concurrently` as dev dependencies
@@ -28,6 +32,13 @@ Install `nodemon` and `concurrently` as dev dependencies
 ```
 npm install nodemon concurrently --save-dev
 ```
+
+Learn more about these packages
+
+- [nodemon](https://github.com/remy/nodemon)
+- [concurrently](https://github.com/kimmobrunfeldt/concurrently)
+
+
 
 ## Step 4: Add `src/server/index.js` file
 
