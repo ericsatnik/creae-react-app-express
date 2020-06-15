@@ -153,6 +153,32 @@ function App() {
 export default App;
 ```
 
+## Step 5: Update `src/App.css` file
+
+```
+.App-header {
+  background-color: #282c34;
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-main {
+  background-color: white;
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: #282c34;
+}
+```
+
 ## Step 6: Add `proxy` to `package.json`
 
 ```
