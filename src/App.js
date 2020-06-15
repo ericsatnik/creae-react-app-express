@@ -24,7 +24,7 @@ function App() {
       }
     };
     fetchData();
-  }, [usersError]);
+  }, [users, usersError]);
 
   return (
     <div className="App">
@@ -42,7 +42,8 @@ function App() {
           Learn React
         </a>
         <br />
-        <br />
+      </header>
+      <main className="App-main">
         {usersError && <div>{usersError}</div>}
         {users.length === 0 && !isLoading && (
           <div>
@@ -61,7 +62,7 @@ function App() {
           </div>
         )}
         {isLoading && <p>Loading...</p>}
-      </header>
+      </main>
     </div>
   );
 }
