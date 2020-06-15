@@ -4,19 +4,27 @@ import "./App.css";
 
 function App() {
   const [users, setUsers] = useState([]);
+  const [usersError, setUsersError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       try {
         const response = await fetch("api/users");
         const users = await response.json();
         setUsers(users);
+        setUsersError(null);
+        setIsLoading(false);
       } catch (e) {
-        console.log("5xx Server Error");
+        setUsers([]);
+        setUsersError(e.message);
+        console.log(usersError);
+        setIsLoading(false);
       }
     };
     fetchData();
-  }, []);
+  }, [usersError]);
 
   return (
     <div className="App">
@@ -25,12 +33,6 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <p>Users:</p>
-        <ul>
-          {users.map(user => (
-            <li key={user.id}>{user.username}</li>
-          ))}
-        </ul>
         <a
           className="App-link"
           href="https://reactjs.org"
@@ -39,6 +41,26 @@ function App() {
         >
           Learn React
         </a>
+        <br />
+        <br />
+        {usersError && <div>{usersError}</div>}
+        {users.length === 0 && !isLoading && (
+          <div>
+            <h1>Users:</h1>
+            <p>No users could be found</p>
+          </div>
+        )}
+        {users.length !== 0 && !isLoading && (
+          <div>
+            <h1>Users:</h1>
+            <ul>
+              {users.map((user) => (
+                <li key={user.id}>{user.username}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {isLoading && <p>Loading...</p>}
       </header>
     </div>
   );
