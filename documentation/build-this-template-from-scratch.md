@@ -179,7 +179,8 @@ export default App;
     "start": "concurrently \"npm run client\" \"npm run server\"",
     "client": "react-scripts start",
     "server": "nodemon src/server",
-    "build": "concurrently \"react-scripts build\" \"npm run server\"",
+    "build": "react-scripts build",
+    "serve": "npm run build && node src/server",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
 ```
