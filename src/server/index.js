@@ -1,24 +1,14 @@
 const express = require("express");
+let fs = require("fs");
+let path = require("path");
 const compression = require("compression");
 const app = express();
 
-const users = [
-  {
-    id: 1,
-    username: "user1",
-  },
-  {
-    id: 2,
-    username: "user2",
-  },
-  {
-    id: 3,
-    username: "user3",
-  },
-];
+let usersFilePath = path.join(__dirname, "json/users.json");
+let usersFile = fs.readFileSync(usersFilePath);
+let users = JSON.parse(usersFile);
 
 app.use(compression());
-
 app.use(express.static("build"));
 
 app.get("/ping", function (req, res) {
@@ -26,9 +16,9 @@ app.get("/ping", function (req, res) {
   return res.send("pong");
 });
 
-app.get("/api/users", (req, res) => {
+app.get("/users", function (req, res) {
   console.log("get users");
-  setTimeout(() => res.json(users), 300);
+  res.json(users);
 });
 
 app.listen(process.env.PORT || 8080, () =>

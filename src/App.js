@@ -9,9 +9,10 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log("CLIENT_GET_UERS");
       setIsLoading(true);
       try {
-        const response = await fetch("api/users");
+        const response = await fetch("users");
         const users = await response.json();
         setUsers(users);
         setUsersError(null);
@@ -24,7 +25,7 @@ function App() {
       }
     };
     fetchData();
-  }, [users, usersError]);
+  }, []);
 
   return (
     <div className="App">
@@ -61,7 +62,16 @@ function App() {
             </ul>
           </div>
         )}
-        {isLoading && <p>Loading...</p>}
+        {isLoading && (
+          <div class="sk-chase">
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+          </div>
+        )}
       </main>
     </div>
   );

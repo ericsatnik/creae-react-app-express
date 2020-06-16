@@ -38,30 +38,40 @@ Learn more about these packages
 - [nodemon](https://github.com/remy/nodemon)
 - [concurrently](https://github.com/kimmobrunfeldt/concurrently)
 
-## Step 4: Add `src/server/index.js` file
+## Step 4: Add `src/server/json/user.json file`
+
+```
+[
+  {
+    "id": 1,
+    "username": "user1"
+  },
+  {
+    "id": 2,
+    "username": "user2"
+  },
+  {
+    "id": 3,
+    "username": "user3"
+  }
+]
+
+```
+
+## Step 5: Add `src/server/index.js` file
 
 ```
 const express = require("express");
+let fs = require("fs");
+let path = require("path");
 const compression = require("compression");
 const app = express();
 
-const users = [
-  {
-    id: 1,
-    username: "user1",
-  },
-  {
-    id: 2,
-    username: "user2",
-  },
-  {
-    id: 3,
-    username: "user3",
-  },
-];
+let usersFilePath = path.join(__dirname, "json/users.json");
+let usersFile = fs.readFileSync(usersFilePath);
+let users = JSON.parse(usersFile);
 
 app.use(compression());
-
 app.use(express.static("build"));
 
 app.get("/ping", function (req, res) {
@@ -69,17 +79,18 @@ app.get("/ping", function (req, res) {
   return res.send("pong");
 });
 
-app.get("/api/users", (req, res) => {
+app.get("/users", function (req, res) {
   console.log("get users");
-  setTimeout(() => res.json(users), 300);
+  res.json(users);
 });
 
 app.listen(process.env.PORT || 8080, () =>
   console.log(`Listening on port ${process.env.PORT || 8080}!`)
 );
+
 ```
 
-## Step 5: Update `src/App.js` file
+## Step 6: Update `src/App.js` file
 
 ```
 import React, { useState, useEffect } from "react";
@@ -93,9 +104,10 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log("CLIENT_GET_UERS");
       setIsLoading(true);
       try {
-        const response = await fetch("api/users");
+        const response = await fetch("users");
         const users = await response.json();
         setUsers(users);
         setUsersError(null);
@@ -108,7 +120,7 @@ function App() {
       }
     };
     fetchData();
-  }, [users, usersError]);
+  }, []);
 
   return (
     <div className="App">
@@ -126,15 +138,16 @@ function App() {
           Learn React
         </a>
         <br />
-        <br />
+      </header>
+      <main className="App-main">
         {usersError && <div>{usersError}</div>}
-        {users.length === 0 && (
+        {users.length === 0 && !isLoading && (
           <div>
             <h1>Users:</h1>
             <p>No users could be found</p>
           </div>
         )}
-        {users.length !== 0 && (
+        {users.length !== 0 && !isLoading && (
           <div>
             <h1>Users:</h1>
             <ul>
@@ -144,8 +157,9 @@ function App() {
             </ul>
           </div>
         )}
-        {isLoading && <p>Loading...</p>}
-      </header>
+        {isLoading && <p>Loading</p>
+        )}
+      </main>
     </div>
   );
 }
@@ -153,39 +167,13 @@ function App() {
 export default App;
 ```
 
-## Step 5: Update `src/App.css` file
-
-```
-.App-header {
-  background-color: #282c34;
-  min-height: 50vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-main {
-  background-color: white;
-  min-height: 50vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: #282c34;
-}
-```
-
-## Step 6: Add `proxy` to `package.json`
+## Step 7: Add `proxy` to `package.json`
 
 ```
 "proxy": "http://localhost:8080"
 ```
 
-## Step 7: Update `scripts` in `package.json`
+## Step 8: Update `scripts` in `package.json`
 
 ```
     "start": "concurrently \"npm run client\" \"npm run server\"",
@@ -196,7 +184,7 @@ export default App;
     "eject": "react-scripts eject"
 ```
 
-## Step 8: Start `create-react-app-express`
+## Step 9: Start `create-react-app-express`
 
 ```
 npm run start
